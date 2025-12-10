@@ -5,7 +5,7 @@ import { Button } from "@/components/ui/button";
 import { Badge } from "@/components/ui/badge";
 import { Card } from "@/components/ui/card";
 import { ProductCarousel } from "@/components/products/ProductCarousel";
-import { ARTryOn } from "@/components/ar/ARTryOn";
+import { ARTryOnDemo } from "@/components/ar/ARTryOnDemo";
 import { sampleProducts } from "@/data/products";
 import { 
   Star, 
@@ -91,7 +91,7 @@ export default function ProductDetail() {
 
             {/* AR Try-On Modal */}
             {showAR && (
-              <ARTryOn
+              <ARTryOnDemo
                 productImage={product.image}
                 productName={product.name}
                 onClose={() => setShowAR(false)}
