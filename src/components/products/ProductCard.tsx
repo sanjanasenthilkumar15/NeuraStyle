@@ -3,7 +3,7 @@ import { Heart, Eye, Sparkles, Star } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { Card } from "@/components/ui/card";
 import { Badge } from "@/components/ui/badge";
-import { ARTryOn } from "@/components/ar/ARTryOn";
+import { ARTryOnDemo } from "@/components/ar/ARTryOnDemo";
 import { cn } from "@/lib/utils";
 
 export interface Product {
@@ -78,7 +78,7 @@ export function ProductCard({ product, onView, onAddToCart }: ProductCardProps) 
 
       {/* AR Try-On Modal */}
       {showAR && (
-        <ARTryOn
+        <ARTryOnDemo
           productImage={product.image}
           productName={product.name}
           onClose={() => setShowAR(false)}
