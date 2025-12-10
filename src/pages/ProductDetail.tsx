@@ -5,6 +5,7 @@ import { Button } from "@/components/ui/button";
 import { Badge } from "@/components/ui/badge";
 import { Card } from "@/components/ui/card";
 import { ProductCarousel } from "@/components/products/ProductCarousel";
+import { ARTryOn } from "@/components/ar/ARTryOn";
 import { sampleProducts } from "@/data/products";
 import { 
   Star, 
@@ -35,6 +36,7 @@ export default function ProductDetail() {
   const [selectedColor, setSelectedColor] = useState(colors[0]);
   const [quantity, setQuantity] = useState(1);
   const [showInventory, setShowInventory] = useState(false);
+  const [showAR, setShowAR] = useState(false);
 
   const product = sampleProducts.find((p) => p.id === id) || sampleProducts[0];
 
@@ -81,11 +83,20 @@ export default function ProductDetail() {
               </div>
               
               {/* AR Try-On Button */}
-              <Button variant="yellow" size="lg" className="w-full gap-2">
+              <Button variant="yellow" size="lg" className="w-full gap-2" onClick={() => setShowAR(true)}>
                 <Sparkles className="w-5 h-5" />
                 Try in AR
               </Button>
             </div>
+
+            {/* AR Try-On Modal */}
+            {showAR && (
+              <ARTryOn
+                productImage={product.image}
+                productName={product.name}
+                onClose={() => setShowAR(false)}
+              />
+            )}
 
             {/* Product Info */}
             <div className="space-y-6">

@@ -1,7 +1,9 @@
+import { useState } from "react";
 import { Heart, Eye, Sparkles, Star } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { Card } from "@/components/ui/card";
 import { Badge } from "@/components/ui/badge";
+import { ARTryOn } from "@/components/ar/ARTryOn";
 import { cn } from "@/lib/utils";
 
 export interface Product {
@@ -22,10 +24,11 @@ interface ProductCardProps {
   product: Product;
   onView?: () => void;
   onAddToCart?: () => void;
-  onTryAR?: () => void;
 }
 
-export function ProductCard({ product, onView, onAddToCart, onTryAR }: ProductCardProps) {
+export function ProductCard({ product, onView, onAddToCart }: ProductCardProps) {
+  const [showAR, setShowAR] = useState(false);
+  
   const discount = product.originalPrice
     ? Math.round(((product.originalPrice - product.price) / product.originalPrice) * 100)
     : 0;
@@ -66,12 +69,21 @@ export function ProductCard({ product, onView, onAddToCart, onTryAR }: ProductCa
 
         {/* AR Try-On Button */}
         <div className="absolute bottom-3 left-3 right-3 opacity-0 group-hover:opacity-100 transition-all translate-y-2 group-hover:translate-y-0">
-          <Button variant="yellow" size="sm" className="w-full gap-2" onClick={onTryAR}>
+          <Button variant="yellow" size="sm" className="w-full gap-2" onClick={() => setShowAR(true)}>
             <Sparkles className="w-4 h-4" />
             Try in AR
           </Button>
         </div>
       </div>
+
+      {/* AR Try-On Modal */}
+      {showAR && (
+        <ARTryOn
+          productImage={product.image}
+          productName={product.name}
+          onClose={() => setShowAR(false)}
+        />
+      )}
 
       <div className="p-4">
         {/* Rating */}
